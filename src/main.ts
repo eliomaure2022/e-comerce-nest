@@ -14,6 +14,7 @@ async function bootstrap() {
   );
 
   const config = new DocumentBuilder()
+    .addBearerAuth()
     .setTitle('E-comerce')
     .setDescription('E-comerce creado en Nest.js')
     .setVersion('1.0')

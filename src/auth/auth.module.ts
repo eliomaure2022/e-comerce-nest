@@ -9,6 +9,7 @@ import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { CartModule } from 'src/cart/cart.module';
 import { UserService } from 'src/user/user.service';
+import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Module({
   imports: [
@@ -22,13 +23,13 @@ import { UserService } from 'src/user/user.service';
       useFactory: () => ({
         secret: process.env.TOKEN_SECRET,
         signOptions: {
-          expiresIn: '1d',
+          expiresIn: '60s',
         },
       }),
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, UserService],
+  providers: [AuthService, UserService, JwtStrategy],
   exports: [PassportModule, JwtModule],
 })
 export class AuthModule {}
